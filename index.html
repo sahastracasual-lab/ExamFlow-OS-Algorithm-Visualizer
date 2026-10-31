@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExamOS — Online Examination and Result Processing System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-icon">
+        <svg width="34" height="34" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="url(#brandGrad)"/>
+          <path d="M7 10h18M7 16h12M7 22h14" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="23" cy="22" r="3.5" fill="#10b981" stroke="#0a0f1d" stroke-width="1.5"/>
+          <defs>
+            <linearGradient id="brandGrad" x1="0" y1="0" x2="32" y2="32">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="50%" stop-color="#0ea5e9"/>
+              <stop offset="100%" stop-color="#10b981"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>ExamOS</h1>
+        <span>Online Examination &amp; Result Processing OS Simulation</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <button class="btn-viva-guide" id="btnOpenVivaModal">🎓 Teacher Viva Cheat Sheet</button>
+      <div class="status-dot status-live"></div>
+      <span class="status-label">Peak Submission Engine Active</span>
+      <div class="header-time" id="headerTime">00:00:00</div>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="producer-consumer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      <span>Submission Queue</span>
+      <span class="tab-badge">Module 1</span>
+    </button>
+    <button class="tab-btn" data-tab="cpu-scheduler">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="4" y="4" width="16" height="16" rx="2"/>
+        <rect x="9" y="9" width="6" height="6"/>
+        <path d="M15 2v2M9 2v2M15 20v2M9 20v2M20 15h2M20 9h2M2 15h2M2 9h2"/>
+      </svg>
+      <span>CPU Scheduler</span>
+      <span class="tab-badge">Module 2</span>
+    </button>
+    <button class="tab-btn" data-tab="bankers">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <span>Deadlock Avoidance</span>
+      <span class="tab-badge">Module 3</span>
+    </button>
+    <button class="tab-btn" data-tab="memory">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 19v-3M10 19v-7M14 19v-5M18 19v-11"/>
+        <rect x="2" y="2" width="20" height="8" rx="2"/>
+      </svg>
+      <span>Memory Manager</span>
+      <span class="tab-badge">Module 4</span>
+    </button>
+    <button class="tab-btn" data-tab="pipeline">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      <span>Live Pipeline</span>
+      <span class="tab-badge pipeline-badge">Module 5</span>
+    </button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- ======================== MODULE 1: Producer-Consumer ======================== -->
+    <section class="tab-panel active" id="tab-producer-consumer">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Bounded Buffer — Submission Queue Synchronization</h2>
+          <p class="panel-subtitle">Counting and Binary Semaphores coordinating student answer uploads (Producers) and grading workers (Consumers) to avoid packet drops and race conditions during countdown bursts.</p>
+        </div>
+        <div class="panel-concept-badge">Producer-Consumer Model</div>
+      </div>
+
+      <!-- Educational Concept Banner -->
+      <div class="concept-banner">
+        <div class="concept-header">
+          <div class="concept-title-group">
+            <span class="concept-icon">📖</span>
+            <div class="concept-title">OS Theory Decoded: What is the Producer-Consumer Problem?</div>
+          </div>
+          <span class="concept-tag">Process Synchronization &bull; IPC</span>
+        </div>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-card-title">👨‍🎓 What is a Producer?</div>
+            <div class="concept-card-desc">
+              In Operating Systems, a <strong>Producer</strong> thread creates data and places it into shared memory. Here, every student submitting an answer sheet during the exam countdown is a Producer thread.
+            </div>
+            <div class="concept-card-realworld">Real-world: 5,000 students clicking "Submit" at 11:59:59 AM.</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">⚙ What is a Consumer?</div>
+            <div class="concept-card-desc">
+              A <strong>Consumer</strong> thread pulls data from shared memory and processes it. In ExamOS, automated grading worker threads act as Consumers, pulling answer sheets to grade MCQs, scan code, and calculate percentiles.
+            </div>
+            <div class="concept-card-realworld">Real-world: Background server threads executing grading logic.</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">🔄 What is the Bounded Buffer?</div>
+            <div class="concept-card-desc">
+              A fixed-size circular memory queue of capacity <strong>N (default 8)</strong> slots. It acts as an asynchronous buffer so bursty incoming network requests don't choke the grading threads.
+            </div>
+            <div class="concept-card-realworld">Invariant: empty + full = N slots at all times.</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">🚦 Why 3 Semaphores?</div>
+            <div class="concept-card-desc">
+              &bull; <strong>mutex (Binary = 1):</strong> Only 1 thread can write/read at once. Prevents <em>Race Conditions</em>.<br>
+              &bull; <strong>empty (Counting = N):</strong> Available slots. Producer waits if 0.<br>
+              &bull; <strong>full (Counting = 0):</strong> Tasks pending. Consumer waits if 0.
+            </div>
+            <div class="concept-card-realworld">Prevents buffer overflow and underflow deadlocks.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semaphore Status Row -->
+      <div class="metrics-row" id="pc-semaphores">
+        <div class="metric-card">
+          <div class="metric-label">mutex (Binary Semaphore)</div>
+          <div class="metric-value accent-amber" id="sem-mutex">1</div>
+          <div class="metric-sublabel">Buffer Lock (1=Unlocked, 0=Locked)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">empty (Counting Semaphore)</div>
+          <div class="metric-value accent-cyan" id="sem-empty">8</div>
+          <div class="metric-sublabel">Free Slots Remaining</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">full (Counting Semaphore)</div>
+          <div class="metric-value accent-emerald" id="sem-full">0</div>
+          <div class="metric-sublabel">Queued Answer Payloads</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Buffer Capacity Used</div>
+          <div class="metric-value accent-indigo" id="buf-utilization">0%</div>
+          <div class="metric-sublabel">Slot Saturation %</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Total Produced</div>
+          <div class="metric-value accent-cyan" id="total-produced">0</div>
+          <div class="metric-sublabel">Student Submissions Ingested</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Total Consumed</div>
+          <div class="metric-value accent-emerald" id="total-consumed">0</div>
+          <div class="metric-sublabel">Graded by Workers</div>
+        </div>
+      </div>
+
+      <!-- Buffer Visualization -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Shared Memory Ring Buffer (Bounded Queue)</h3>
+          <div class="buffer-controls">
+            <label class="ctrl-label">Buffer Slots (N):</label>
+            <input type="range" id="buf-capacity" min="4" max="12" value="8" class="range-input">
+            <span class="range-val" id="buf-cap-display">8</span>
+          </div>
+        </div>
+        <div class="buffer-grid" id="bufferGrid"></div>
+        <div class="buffer-pointers">
+          <span class="pointer-badge producer-ptr">↑ WRITE HEAD (Producer Ingestion)</span>
+          <span class="pointer-badge consumer-ptr">↓ READ HEAD (Consumer Worker)</span>
+        </div>
+      </div>
+
+      <!-- Controls & Explanations -->
+      <div class="controls-row">
+        <!-- Producer Card -->
+        <div class="card controls-card">
+          <h3 class="card-title">Producer — Student Portal Threads</h3>
+          <div class="producer-indicator" id="producerIndicator">
+            <div class="indicator-dot"></div>
+            <span>Idle (Ready to Submit)</span>
+          </div>
+
+          <!-- Submit Button + Explanation -->
+          <div class="btn-wrapper">
+            <button class="btn btn-producer" id="btnProduce">✎ Submit Answer (Produce)</button>
+            <div class="btn-explain-box">
+              <strong>What this button does:</strong> Executes <code>wait(empty) &rarr; wait(mutex) &rarr; write &rarr; signal(mutex) &rarr; signal(full)</code>. Simulates 1 student uploading their exam sheet into the next available buffer slot.
+            </div>
+          </div>
+
+          <!-- Burst Button + Explanation -->
+          <div class="btn-wrapper">
+            <button class="btn btn-burst" id="btnBurst">⚡ Peak Submission Burst (5 Submissions)</button>
+            <div class="btn-explain-box">
+              <strong>What this button does:</strong> Simulates an intense countdown rush by firing 5 student submissions in rapid succession (120ms intervals). Shows how counting semaphores safely buffer rapid bursts without dropped packets.
+            </div>
+          </div>
+
+          <!-- Auto Produce Speed Slider -->
+          <div class="ctrl-group">
+            <label class="ctrl-label">Auto-Produce Interval (ms):</label>
+            <input type="range" id="produceSpeed" min="400" max="3000" value="1400" class="range-input">
+            <span class="range-val" id="produceSpeedVal">1400</span>
+            <span class="btn-desc">Adjust how fast incoming student submissions arrive automatically.</span>
+          </div>
+          <button class="btn btn-secondary" id="btnAutoProduceToggle">▶ Start Auto-Produce</button>
+        </div>
+
+        <!-- Consumer Card -->
+        <div class="card controls-card">
+          <h3 class="card-title">Consumer — Grading Worker Threads</h3>
+          <div class="consumer-indicator" id="consumerIndicator">
+            <div class="indicator-dot"></div>
+            <span>Idle (Waiting for Work)</span>
+          </div>
+
+          <!-- Grade Button + Explanation -->
+          <div class="btn-wrapper">
+            <button class="btn btn-consumer" id="btnConsume">⚙ Grade Answer (Consume)</button>
+            <div class="btn-explain-box">
+              <strong>What this button does:</strong> Executes <code>wait(full) &rarr; wait(mutex) &rarr; read &rarr; signal(mutex) &rarr; signal(empty)</code>. A background worker thread extracts the oldest submission, frees the slot, and grades the paper.
+            </div>
+          </div>
+
+          <!-- Auto Consume Speed Slider -->
+          <div class="ctrl-group">
+            <label class="ctrl-label">Auto-Consume Interval (ms):</label>
+            <input type="range" id="consumeSpeed" min="400" max="3000" value="1800" class="range-input">
+            <span class="range-val" id="consumeSpeedVal">1800</span>
+            <span class="btn-desc">Adjust how fast automated grading workers evaluate submissions.</span>
+          </div>
+          <button class="btn btn-secondary" id="btnAutoConsumeToggle">▶ Start Auto-Consume</button>
+
+          <!-- Reset Button -->
+          <div class="btn-wrapper" style="margin-top: 10px;">
+            <button class="btn btn-danger" id="btnReset">↺ Reset Buffer &amp; Semaphores</button>
+            <div class="btn-explain-box">
+              <strong>What this button does:</strong> Clears all queued submissions and restores semaphores to default values (<code>mutex=1, empty=N, full=0</code>).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teacher Viva Note -->
+      <div class="teacher-note">
+        <span class="teacher-note-icon">🎓</span>
+        <div class="teacher-note-content">
+          <strong>What to Tell Your Teacher About Module 1:</strong>
+          "Professor, when thousands of students submit answers at the deadline, multiple threads attempt to write to the shared memory array at once. Without synchronization, this causes a <em>Race Condition</em> where submissions overwrite each other and are lost. We solved this using Dijkstra's classical counting semaphores: a binary <code>mutex</code> guarantees mutual exclusion, <code>empty</code> prevents buffer overflow, and <code>full</code> signals worker threads when grading tasks are ready."
+        </div>
+      </div>
+
+      <!-- Event Log -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Thread Synchronization Event Log</h3>
+          <button class="btn btn-xs" id="btnClearLog">Clear Log</button>
+        </div>
+        <div class="event-log" id="eventLog"></div>
+      </div>
+    </section>
+
+    <!-- ======================== MODULE 2: CPU Scheduler ======================== -->
+    <section class="tab-panel" id="tab-cpu-scheduler">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">CPU Scheduling Engine — Examination Task Dispatcher</h2>
+          <p class="panel-subtitle">Evaluates Round Robin, FCFS, SJF (Preemptive/Non-Preemptive), and Priority algorithms. Demonstrates how long Code Evaluations starve short MCQ Scans without time-sliced preemptive scheduling.</p>
+        </div>
+        <div class="panel-concept-badge">CPU Scheduling Engine</div>
+      </div>
+
+      <!-- Educational Concept Banner -->
+      <div class="concept-banner">
+        <div class="concept-header">
+          <div class="concept-title-group">
+            <span class="concept-icon">📖</span>
+            <div class="concept-title">OS Theory Decoded: CPU Scheduling, Starvation &amp; The Convoy Effect</div>
+          </div>
+          <span class="concept-tag">Process Scheduling &bull; CPU Dispatch</span>
+        </div>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-card-title">🎯 Why CPU Scheduling in Exams?</div>
+            <div class="concept-card-desc">
+              Exam workloads are heterogeneous: MCQ scoring takes only 2–5 ms, whereas compiling code or scanning plagiarism takes 8–15 ms. The OS CPU scheduler decides which task runs on the processor core to maximize throughput and minimize latency.
+            </div>
+            <div class="concept-card-realworld">Goal: Keep students from waiting indefinitely for their score card.</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">🚛 What is the Convoy Effect? (FCFS)</div>
+            <div class="concept-card-desc">
+              In First-Come First-Served, if a heavy task (e.g. Code Evaluation, burst 8ms) arrives first, ALL subsequent lightweight tasks (MCQs, burst 2ms) are stuck waiting behind it like cars behind a slow truck. This spikes average waiting time.
+            </div>
+            <div class="concept-card-realworld">Result: Average waiting time inflates from 7.6ms to 9.4ms!</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">⏱ Round Robin (q = 2 ms) [Recommended]</div>
+            <div class="concept-card-desc">
+              The OS gives every process a fixed slice of CPU time (time quantum <strong>q = 2ms</strong>). If the task isn't done, it is <em>preempted</em> and placed at the back of the ready queue. Every student gets fair-share attention.
+            </div>
+            <div class="concept-card-realworld">Guaranteed: Zero starvation! Maximum wait bounded to (n-1)&times;q.</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">💀 What is CPU Starvation? (SJF / Priority)</div>
+            <div class="concept-card-desc">
+              In Shortest Job First or Priority scheduling, long or low-priority tasks (e.g. descriptive code grading) can be starved indefinitely if a continuous stream of short MCQ submissions arrives.
+            </div>
+            <div class="concept-card-realworld">SJF has lowest average WT, but suffers from starvation risk.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Algorithm Selector & Controls -->
+      <div class="scheduler-controls card">
+        <div class="sch-ctrl-row">
+          <div class="ctrl-group">
+            <label class="ctrl-label">Scheduling Algorithm</label>
+            <select class="select-input" id="algoSelect">
+              <option value="rr" selected>Round Robin (RR) — Fair Share / Zero Starvation</option>
+              <option value="fcfs">First-Come, First-Served (FCFS) — Convoy Effect Demo</option>
+              <option value="sjf">Shortest Job First (SJF) — Non-Preemptive</option>
+              <option value="srtf">Shortest Remaining Time First (SRTF) — Preemptive SJF</option>
+              <option value="priority_np">Priority Scheduling — Non-Preemptive</option>
+              <option value="priority_p">Priority Scheduling — Preemptive</option>
+            </select>
+            <span class="btn-desc">Select how the OS CPU dispatcher decides execution order.</span>
+          </div>
+          <div class="ctrl-group" id="quantumGroup">
+            <label class="ctrl-label">Time Quantum (q ms)</label>
+            <input type="number" class="num-input" id="quantum" value="2" min="1" max="10">
+            <span class="btn-desc">Time slice allotted to each process before preemption.</span>
+          </div>
+          <button class="btn btn-primary" id="btnRunScheduler">▶ Execute Scheduler</button>
+          <button class="btn btn-secondary" id="btnResetScheduler">↺ Reset Default Tasks</button>
+        </div>
+      </div>
+
+      <!-- Task Table -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Examination Workload Process Control Blocks (PCBs)</h3>
+          <button class="btn btn-xs btn-accent" id="btnAddTask">+ Add Custom Task</button>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table" id="taskTable">
+            <thead>
+              <tr>
+                <th>PID</th>
+                <th>Task Name / Function</th>
+                <th>Arrival Time (ms)</th>
+                <th>Burst Time (ms)</th>
+                <th>Priority (1=High)</th>
+                <th>Memory Footprint (MB)</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="taskTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Gantt Chart -->
+      <div class="card" id="ganttCard">
+        <div class="card-header">
+          <h3 class="card-title">Animated Gantt Chart — CPU Dispatch Timeline</h3>
+          <span class="algo-badge" id="algoLabel">Round Robin (q=2ms)</span>
+        </div>
+        <div class="gantt-container">
+          <div class="gantt-chart" id="ganttChart"></div>
+          <div class="gantt-timeline" id="ganttTimeline"></div>
+        </div>
+      </div>
+
+      <!-- Results Table -->
+      <div class="card" id="resultsCard">
+        <div class="card-header">
+          <h3 class="card-title">Task Completion &amp; Turnaround Metrics</h3>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table" id="resultsTable">
+            <thead>
+              <tr>
+                <th>PID</th>
+                <th>Arrival</th>
+                <th>Burst</th>
+                <th>Priority</th>
+                <th>Completion (CT)</th>
+                <th>Turnaround (TAT)</th>
+                <th>Waiting Time (WT)</th>
+                <th>Normalized TAT (TAT/Burst)</th>
+              </tr>
+            </thead>
+            <tbody id="resultsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Metric Cards -->
+      <div class="metrics-row" id="schedulerMetrics">
+        <div class="metric-card">
+          <div class="metric-label">Avg. Turnaround Time</div>
+          <div class="metric-value accent-cyan" id="avgTAT">—</div>
+          <div class="metric-sublabel">Formula: TAT = CT &minus; AT</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Avg. Waiting Time</div>
+          <div class="metric-value accent-amber" id="avgWT">—</div>
+          <div class="metric-sublabel">Formula: WT = TAT &minus; BT</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">CPU Utilization</div>
+          <div class="metric-value accent-emerald" id="cpuUtil">—</div>
+          <div class="metric-sublabel">Active / Total Timeline</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Throughput</div>
+          <div class="metric-value accent-indigo" id="throughput">—</div>
+          <div class="metric-sublabel">Completed tasks per ms</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Maximum Waiting Time</div>
+          <div class="metric-value accent-rose" id="maxWT">—</div>
+          <div class="metric-sublabel">Longest wait experienced</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Starvation Risk</div>
+          <div class="metric-value" id="starvationBadge">—</div>
+          <div class="metric-sublabel">Algorithm fairness evaluation</div>
+        </div>
+      </div>
+
+      <!-- Teacher Viva Note -->
+      <div class="teacher-note">
+        <span class="teacher-note-icon">🎓</span>
+        <div class="teacher-note-content">
+          <strong>What to Tell Your Teacher About Module 2:</strong>
+          "Professor, we benchmarked 6 CPU scheduling algorithms on realistic exam tasks. In FCFS, heavy descriptive code evaluation (P2, burst 8ms) blocks short MCQ grading (P3, burst 2ms), causing an unacceptable Convoy Effect. While Shortest Job First (SJF) achieves the lowest average waiting time mathematically, it starves long code grading tasks if submissions keep arriving. Therefore, Round Robin with a time quantum of q=2ms is the optimal algorithm because it provides fair-share preemption and completely eliminates CPU starvation!"
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== MODULE 3: Banker's Algorithm ======================== -->
+    <section class="tab-panel" id="tab-bankers">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Deadlock Avoidance — Banker's Algorithm Controller</h2>
+          <p class="panel-subtitle">Prevents circular waits across grading engines, database result ledgers, and PDF generator locks through continuous state safety checks.</p>
+        </div>
+        <div class="panel-concept-badge">Dijkstra's Banker's Algorithm</div>
+      </div>
+
+      <!-- Educational Concept Banner -->
+      <div class="concept-banner">
+        <div class="concept-header">
+          <div class="concept-title-group">
+            <span class="concept-icon">📖</span>
+            <div class="concept-title">OS Theory Decoded: Deadlocks, Coffman Conditions &amp; Banker's Algorithm</div>
+          </div>
+          <span class="concept-tag">Deadlock Avoidance &bull; Safe State</span>
+        </div>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-card-title">🔒 What is a Deadlock?</div>
+            <div class="concept-card-desc">
+              A permanent standstill where a set of worker processes are blocked because each is holding a resource and waiting for another resource held by another process in a circular loop.
+            </div>
+            <div class="concept-card-realworld">Real-world: Worker 1 holds DB Lock and waits for PDF Slot; Worker 2 holds PDF Slot and waits for DB Lock!</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">📋 4 Coffman Conditions</div>
+            <div class="concept-card-desc">
+              Deadlock happens ONLY if all 4 conditions hold simultaneously:<br>
+              1. <strong>Mutual Exclusion</strong> &bull; 2. <strong>Hold and Wait</strong><br>
+              3. <strong>No Preemption</strong> &bull; 4. <strong>Circular Wait</strong><br>
+              Breaking <em>any single condition</em> prevents deadlock!
+            </div>
+            <div class="concept-card-realworld">Banker's algorithm dynamically avoids Circular Wait.</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">🖥 The 3 Exam Resources</div>
+            <div class="concept-card-desc">
+              &bull; <strong>R₁ (Auto-Grading Worker Threads):</strong> 10 total instances.<br>
+              &bull; <strong>R₂ (DB Result Ledger Write Locks):</strong> 5 total locks.<br>
+              &bull; <strong>R₃ (PDF Generator Slots):</strong> 7 total rendering slots.
+            </div>
+            <div class="concept-card-realworld">Formula: Available = Total &minus; &sum; Allocation.</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">🛡 Safe State vs Unsafe State</div>
+            <div class="concept-card-desc">
+              A state is <strong>Safe</strong> if there exists at least one <em>Safe Sequence</em> &lang;P<sub>1</sub>, P<sub>3</sub>, P<sub>4</sub>, P<sub>0</sub>, P<sub>2</sub>&rang; where every process can satisfy its maximum claim and finish. An <strong>Unsafe State</strong> is NOT deadlocked yet, but deadlocks cannot be prevented if processes request their max!
+            </div>
+            <div class="concept-card-realworld">Need Matrix: Need[i][j] = Max[i][j] &minus; Allocation[i][j].</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resource Overview -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-label">R₁ — Grading Worker Threads</div>
+          <div class="metric-value accent-cyan" id="avail-r1">3</div>
+          <div class="metric-sublabel">Available / 10 Total</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">R₂ — DB Ledger Write Locks</div>
+          <div class="metric-value accent-emerald" id="avail-r2">3</div>
+          <div class="metric-sublabel">Available / 5 Total</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">R₃ — PDF Generator Slots</div>
+          <div class="metric-value accent-indigo" id="avail-r3">2</div>
+          <div class="metric-sublabel">Available / 7 Total</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">System State</div>
+          <div class="metric-value" id="systemStateDisplay">Unchecked</div>
+          <div class="metric-sublabel">Deadlock Free Status</div>
+        </div>
+      </div>
+
+      <div class="bankers-grid">
+        <!-- Allocation Matrix -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Allocation Matrix</h3>
+            <div class="matrix-labels">R₁ | R₂ | R₃</div>
+          </div>
+          <table class="data-table matrix-table" id="allocationTable">
+            <thead><tr><th>Process</th><th>R₁</th><th>R₂</th><th>R₃</th></tr></thead>
+            <tbody id="allocationBody"></tbody>
+          </table>
+        </div>
+        <!-- Maximum Matrix -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Max Claim Matrix</h3>
+            <div class="matrix-labels">R₁ | R₂ | R₃</div>
+          </div>
+          <table class="data-table matrix-table" id="maxTable">
+            <thead><tr><th>Process</th><th>R₁</th><th>R₂</th><th>R₃</th></tr></thead>
+            <tbody id="maxBody"></tbody>
+          </table>
+        </div>
+        <!-- Need Matrix -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Need Matrix (Max − Alloc)</h3>
+            <div class="matrix-labels">R₁ | R₂ | R₃</div>
+          </div>
+          <table class="data-table matrix-table" id="needTable">
+            <thead><tr><th>Process</th><th>R₁</th><th>R₂</th><th>R₃</th></tr></thead>
+            <tbody id="needBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Actions & Explanations -->
+      <div class="controls-row">
+        <!-- Safety Controls -->
+        <div class="card" style="flex:1">
+          <h3 class="card-title">Safety Check Controller</h3>
+          <div class="bankers-btn-row">
+            <button class="btn btn-primary" id="btnSafetyCheck">🛡 Run Safety Check</button>
+            <button class="btn btn-secondary" id="btnNormalState">✔ Normal Safe State Preset</button>
+            <button class="btn btn-danger" id="btnDeadlockState">☠ Deadlock Hazard State Preset</button>
+          </div>
+          <div class="btn-explain-box" style="margin-bottom: 12px;">
+            <strong>Button Explanations:</strong><br>
+            &bull; <strong>Run Safety Check:</strong> Simulates Dijkstra's safety algorithm step-by-step. Tests if <code>Need &le; Work</code> and recovers allocations.<br>
+            &bull; <strong>Normal Safe State:</strong> Loads default state where safe sequence &lang;P1 &rarr; P3 &rarr; P4 &rarr; P0 &rarr; P2&rang; exists.<br>
+            &bull; <strong>Deadlock Hazard Preset:</strong> Adjusts allocations so resources are trapped and no safe sequence exists!
+          </div>
+          <div class="safety-result" id="safetyResult"></div>
+        </div>
+
+        <!-- Resource Request Evaluator -->
+        <div class="card" style="flex:1">
+          <h3 class="card-title">Dynamic Resource Request Evaluator</h3>
+          <div class="request-form">
+            <div class="ctrl-group">
+              <label class="ctrl-label">Requesting Process</label>
+              <select class="select-input" id="requestProcess">
+                <option value="0">P0 — MCQ Objective Scoring</option>
+                <option value="1">P1 — Plagiarism &amp; Similarity Scan</option>
+                <option value="2">P2 — Descriptive Code Evaluation</option>
+                <option value="3">P3 — Percentile &amp; Rank Computation</option>
+                <option value="4">P4 — PDF Result Card Generation</option>
+              </select>
+            </div>
+            <div class="request-vector-row">
+              <div class="ctrl-group">
+                <label class="ctrl-label">R₁ (Threads)</label>
+                <input type="number" class="num-input small" id="req-r1" value="1" min="0">
+              </div>
+              <div class="ctrl-group">
+                <label class="ctrl-label">R₂ (DB Locks)</label>
+                <input type="number" class="num-input small" id="req-r2" value="0" min="0">
+              </div>
+              <div class="ctrl-group">
+                <label class="ctrl-label">R₃ (PDF Slots)</label>
+                <input type="number" class="num-input small" id="req-r3" value="2" min="0">
+              </div>
+              <button class="btn btn-primary" id="btnRequest">→ Evaluate &amp; Allocate</button>
+            </div>
+          </div>
+          <div class="btn-explain-box" style="margin-bottom: 10px;">
+            <strong>What this form does:</strong> Verifies <code>Request &le; Need</code> and <code>Request &le; Available</code>. Temporarily allocates resources, tests if the resulting state is Safe, and either commits or rolls back to prevent deadlock!
+          </div>
+          <div class="request-result" id="requestResult"></div>
+        </div>
+      </div>
+
+      <!-- Teacher Viva Note -->
+      <div class="teacher-note">
+        <span class="teacher-note-icon">🎓</span>
+        <div class="teacher-note-content">
+          <strong>What to Tell Your Teacher About Module 3:</strong>
+          "Professor, when background grading threads compete for shared database locks, thread pools, and PDF generators, an inverted lock hierarchy can cause a circular wait deadlock where the entire exam server freezes. Dijkstra's Banker's algorithm prevents this: whenever a process requests resources, the OS first checks if granting the request preserves a Safe State. If allocating resources would leave the system in an unsafe state where any process could be blocked indefinitely, the request is denied and the process must wait."
+        </div>
+      </div>
+
+      <!-- Safety Step Log -->
+      <div class="card">
+        <h3 class="card-title">Safety Algorithm Step-by-Step Trace</h3>
+        <div class="event-log" id="bankersLog"></div>
+      </div>
+    </section>
+
+    <!-- ======================== MODULE 4: Memory Manager ======================== -->
+    <section class="tab-panel" id="tab-memory">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Memory Management — Dynamic Contiguous Partitioning</h2>
+          <p class="panel-subtitle">Allocates dynamic student answer payloads into physical RAM using First Fit, Best Fit, and Worst Fit. Models external fragmentation and dynamic memory compaction.</p>
+        </div>
+        <div class="panel-concept-badge">Dynamic Partitioning &amp; Compaction</div>
+      </div>
+
+      <!-- Educational Concept Banner -->
+      <div class="concept-banner">
+        <div class="concept-header">
+          <div class="concept-title-group">
+            <span class="concept-icon">📖</span>
+            <div class="concept-title">OS Theory Decoded: Dynamic Partitioning, Fragmentation &amp; Compaction</div>
+          </div>
+          <span class="concept-tag">Memory Management &bull; Defragmentation</span>
+        </div>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-card-title">🧱 Contiguous Memory Allocation</div>
+            <div class="concept-card-desc">
+              Each student's submitted answer payload (e.g. 120 KB MCQ sheet, 420 KB plagiarism source code) is loaded into a contiguous block of physical RAM. The OS must manage holes (free space) between active processes.
+            </div>
+            <div class="concept-card-realworld">Total RAM Pool: 1024 KB (64 KB OS Kernel, 960 KB User space).</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">🧩 Internal vs External Fragmentation</div>
+            <div class="concept-card-desc">
+              &bull; <strong>Internal Fragmentation:</strong> Unused space inside an allocated partition (0 KB in dynamic variable partitioning).<br>
+              &bull; <strong>External Fragmentation:</strong> Total free RAM is large enough, but broken into small scattered holes that cannot fit a large new payload!
+            </div>
+            <div class="concept-card-realworld">Knuth's 50% Rule: For every N allocated blocks, 0.5N holes exist!</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">📐 First Fit vs Best Fit vs Worst Fit</div>
+            <div class="concept-card-desc">
+              &bull; <strong>First Fit:</strong> Fast. Picks the first hole large enough.<br>
+              &bull; <strong>Best Fit:</strong> Scans all holes and picks the smallest hole large enough. Preserves large holes for big compilation payloads!<br>
+              &bull; <strong>Worst Fit:</strong> Picks largest hole; quickly destroys large continuous spaces.
+            </div>
+            <div class="concept-card-realworld">Best Fit is optimal for conserving large blocks in exam systems.</div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">⚡ What is Memory Compaction?</div>
+            <div class="concept-card-desc">
+              When external fragmentation prevents allocating a payload despite ample total free RAM, the OS kernel performs <strong>Memory Compaction</strong> (Defragmentation): it slides all active blocks toward base addresses and merges all scattered holes into one single large hole!
+            </div>
+            <div class="concept-card-realworld">Click "Compact Memory" to watch the blocks slide together live!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Memory Metrics -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-label">Total RAM Pool</div>
+          <div class="metric-value accent-cyan" id="mem-total">1024 KB</div>
+          <div class="metric-sublabel">Physical Memory Space</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Allocated RAM</div>
+          <div class="metric-value accent-emerald" id="mem-allocated">0 KB</div>
+          <div class="metric-sublabel">In Use by Answer Payloads</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Free RAM</div>
+          <div class="metric-value accent-indigo" id="mem-free">1024 KB</div>
+          <div class="metric-sublabel">Total Aggregate Free Memory</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">External Fragmentation</div>
+          <div class="metric-value accent-rose" id="mem-ext-frag">0 KB</div>
+          <div class="metric-sublabel">Unusable Scattered Holes</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Internal Fragmentation</div>
+          <div class="metric-value accent-amber" id="mem-int-frag">0 KB</div>
+          <div class="metric-sublabel">Wasted Partition Padding</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">RAM Utilization %</div>
+          <div class="metric-value accent-cyan" id="mem-util">0%</div>
+          <div class="metric-sublabel">Memory Density Efficiency</div>
+        </div>
+      </div>
+
+      <!-- Controls & Visualization -->
+      <div class="memory-layout">
+        <div class="card" style="flex:2">
+          <div class="card-header">
+            <h3 class="card-title">Memory Allocation Map — 1024 KB Physical Address Space</h3>
+            <button class="btn btn-accent" id="btnCompact">⚡ Compact Memory (Defragment)</button>
+          </div>
+          <div class="btn-explain-box" style="margin-bottom: 10px;">
+            <strong>💡 Interactive Tip:</strong> Notice the scattered free holes below. Click <strong>⚡ Compact Memory</strong> to see the kernel shift all active blocks to base addresses and merge all holes into one continuous free block! You can also click on any allocated block in the bar to free it.
+          </div>
+          <div class="memory-bar" id="memoryBar"></div>
+          <div class="memory-legend">
+            <span class="legend-item"><span class="legend-dot allocated"></span>Allocated Payload</span>
+            <span class="legend-item"><span class="legend-dot free"></span>Free Hole</span>
+            <span class="legend-item"><span class="legend-dot os-reserved"></span>OS Kernel Reserved (64 KB)</span>
+          </div>
+          <div class="partition-list" id="partitionList"></div>
+        </div>
+
+        <!-- Allocation Form -->
+        <div class="card" style="flex:1">
+          <h3 class="card-title">Allocate Student Response Block</h3>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Allocation Strategy</label>
+            <select class="select-input" id="memStrategy">
+              <option value="first">First Fit (Lowest address hole)</option>
+              <option value="best" selected>Best Fit (Smallest hole that fits &bull; Recommended)</option>
+              <option value="worst">Worst Fit (Largest available hole)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Payload Identifier</label>
+            <input type="text" class="text-input" id="memLabel" placeholder="e.g. Student-42" value="SUB-#504">
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Memory Size (KB)</label>
+            <input type="number" class="num-input" id="memSize" value="120" min="1" max="900">
+          </div>
+          <button class="btn btn-primary" id="btnAllocate">+ Allocate Memory Block</button>
+          <button class="btn btn-secondary" id="btnFreeAll" style="margin-top:8px">✕ Release All Payloads</button>
+
+          <div class="ctrl-group" style="margin-top:16px">
+            <label class="ctrl-label">Quick Examination Presets</label>
+            <div class="preset-btns">
+              <button class="btn btn-xs btn-accent" data-size="120" data-label="MCQ-Batch">120 KB (MCQ)</button>
+              <button class="btn btn-xs btn-accent" data-size="420" data-label="Plagiarism">420 KB (Plag)</button>
+              <button class="btn btn-xs btn-accent" data-size="200" data-label="CodeEval">200 KB (Code)</button>
+              <button class="btn btn-xs btn-accent" data-size="80" data-label="PDF-Card">80 KB (PDF)</button>
+            </div>
+          </div>
+          <div class="mem-event-log" id="memLog"></div>
+        </div>
+      </div>
+
+      <!-- Teacher Viva Note -->
+      <div class="teacher-note">
+        <span class="teacher-note-icon">🎓</span>
+        <div class="teacher-note-content">
+          <strong>What to Tell Your Teacher About Module 4:</strong>
+          "Professor, when students submit variable-sized payloads (120 KB MCQs, 420 KB plagiarism scans) and workers deallocate them upon grading, the physical memory space develops <em>External Fragmentation</em>. Notice on our memory bar that we have 440 KB of free memory total, but it is split into holes of 80 KB, 120 KB, and 240 KB. If a 300 KB code evaluation arrives, it fails to allocate despite 440 KB free! ExamOS solves this through Dynamic Compaction: sliding active partitions to low memory addresses and merging all holes into a single contiguous 440 KB block."
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== MODULE 5: Integrated Pipeline ======================== -->
+    <section class="tab-panel" id="tab-pipeline">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Integrated Live Pipeline — End-to-End Exam Processing</h2>
+          <p class="panel-subtitle">Live unified simulation where peak student answer submissions navigate all 5 sequential OS stages: Semaphore Queue → CPU Round Robin Dispatch → Banker's Deadlock Safety → Dynamic Memory Allocation → Result Publication.</p>
+        </div>
+        <div class="panel-concept-badge live-badge">🔴 Live 5-Stage Simulation</div>
+      </div>
+
+      <!-- Educational Concept Banner -->
+      <div class="concept-banner">
+        <div class="concept-header">
+          <div class="concept-title-group">
+            <span class="concept-icon">📖</span>
+            <div class="concept-title">OS Theory Decoded: End-to-End Operating System Ingestion Pipeline</div>
+          </div>
+          <span class="concept-tag">System Integration &bull; Architecture</span>
+        </div>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-card-title">1. Ingestion Queue (Semaphores)</div>
+            <div class="concept-card-desc">
+              Student clicks "Submit". Portal acquires <code>empty</code> semaphore and <code>mutex</code> lock to safely enqueue the answer payload without race conditions.
+            </div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">2. CPU Dispatch (Round Robin)</div>
+            <div class="concept-card-desc">
+              The OS scheduler assigns CPU time slices (q = 2ms) to execute the evaluation task fairly, preventing heavy code compilation from starving short MCQ scoring.
+            </div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">3. Safety Gate (Banker's Algorithm)</div>
+            <div class="concept-card-desc">
+              Before allocating grading worker threads, database write locks, or PDF slots, Banker's algorithm verifies that the system remains in a strictly Safe State.
+            </div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-title">4. Memory Allocation &amp; Result</div>
+            <div class="concept-card-desc">
+              Contiguous RAM is allocated via Best Fit to assemble the result card. Once published, all locks, threads, and memory blocks are cleanly deallocated back to the OS!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pipeline Stage Visualization -->
+      <div class="pipeline-stages" id="pipelineStages">
+        <div class="pipeline-stage" id="stage-1">
+          <div class="stage-number">STAGE 1</div>
+          <div class="stage-icon">📥</div>
+          <div class="stage-title">Ingestion Queue</div>
+          <div class="stage-sub">Semaphore Bounded Buffer</div>
+          <div class="stage-status idle" id="stage-1-status">IDLE</div>
+          <div class="stage-metric" id="stage-1-metric"></div>
+        </div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-stage" id="stage-2">
+          <div class="stage-number">STAGE 2</div>
+          <div class="stage-icon">⚙</div>
+          <div class="stage-title">CPU Dispatch</div>
+          <div class="stage-sub">Round Robin (q=2ms)</div>
+          <div class="stage-status idle" id="stage-2-status">IDLE</div>
+          <div class="stage-metric" id="stage-2-metric"></div>
+        </div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-stage" id="stage-3">
+          <div class="stage-number">STAGE 3</div>
+          <div class="stage-icon">🛡</div>
+          <div class="stage-title">Deadlock Gate</div>
+          <div class="stage-sub">Banker's Safety Check</div>
+          <div class="stage-status idle" id="stage-3-status">IDLE</div>
+          <div class="stage-metric" id="stage-3-metric"></div>
+        </div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-stage" id="stage-4">
+          <div class="stage-number">STAGE 4</div>
+          <div class="stage-icon">🧠</div>
+          <div class="stage-title">Memory Allocation</div>
+          <div class="stage-sub">Contiguous RAM Map</div>
+          <div class="stage-status idle" id="stage-4-status">IDLE</div>
+          <div class="stage-metric" id="stage-4-metric"></div>
+        </div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-stage" id="stage-5">
+          <div class="stage-number">STAGE 5</div>
+          <div class="stage-icon">✅</div>
+          <div class="stage-title">Result Publication</div>
+          <div class="stage-sub">Score Card Generated</div>
+          <div class="stage-status idle" id="stage-5-status">IDLE</div>
+          <div class="stage-metric" id="stage-5-metric"></div>
+        </div>
+      </div>
+
+      <!-- Pipeline Stats -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-label">Submissions Fired</div>
+          <div class="metric-value accent-cyan" id="pipe-fired">0</div>
+          <div class="metric-sublabel">Total Ingested</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">In-Flight Tasks</div>
+          <div class="metric-value accent-amber" id="pipe-inflight">0</div>
+          <div class="metric-sublabel">Active in Pipeline</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Successfully Published</div>
+          <div class="metric-value accent-emerald" id="pipe-completed">0</div>
+          <div class="metric-sublabel">Completed Pipelines</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Safety / OOM Blocked</div>
+          <div class="metric-value accent-rose" id="pipe-rejected">0</div>
+          <div class="metric-sublabel">Prevented Hazards</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Avg. Pipeline Latency</div>
+          <div class="metric-value accent-indigo" id="pipe-avg-time">— ms</div>
+          <div class="metric-sublabel">End-to-End Processing Time</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Pipeline Throughput</div>
+          <div class="metric-value accent-cyan" id="pipe-throughput">— /s</div>
+          <div class="metric-sublabel">Publish Rate per Second</div>
+        </div>
+      </div>
+
+      <!-- Pipeline Controls & Explanations -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Interactive Pipeline Flight Controls</h3>
+        </div>
+        <div class="pipeline-ctrl-row">
+          <button class="btn btn-burst" id="btnPipelineBurst">⚡ Fire Submission Burst (5 Concurrent)</button>
+          <button class="btn btn-primary" id="btnPipelineStep">⏭ Single Step Submission</button>
+          <button class="btn btn-secondary" id="btnPipelineAuto">▶ Auto Continuous Run</button>
+          <button class="btn btn-danger" id="btnPipelineReset">↺ Reset Entire Pipeline</button>
+        </div>
+        <div class="btn-explain-box" style="margin-top: 12px;">
+          <strong>Flight Control Explanations:</strong><br>
+          &bull; <strong>⚡ Fire Submission Burst:</strong> Launches 5 simultaneous student submissions through the pipeline to demonstrate concurrent resource arbitration.<br>
+          &bull; <strong>⏭ Single Step:</strong> Generates 1 student submission and follows it through each stage step-by-step so you can explain each OS stage to your teacher.<br>
+          &bull; <strong>▶ Auto Continuous Run:</strong> Feeds submissions at regular 3.5s intervals to demonstrate sustained steady-state OS throughput.<br>
+          &bull; <strong>↺ Reset:</strong> Restores all pipeline queues, semaphores, resource allocations, and stage statuses to zero.
+        </div>
+      </div>
+
+      <!-- Teacher Viva Note -->
+      <div class="teacher-note">
+        <span class="teacher-note-icon">🎓</span>
+        <div class="teacher-note-content">
+          <strong>What to Tell Your Teacher About Module 5:</strong>
+          "Professor, Module 5 synthesizes all 4 Operating System concepts into an end-to-end industrial architecture. It proves that an online examination system cannot rely on one mechanism alone: it requires counting semaphores to prevent race conditions during upload, Round Robin CPU scheduling to prevent starvation during grading, Banker's algorithm to eliminate circular wait deadlocks over DB and PDF locks, and dynamic memory allocation with compaction to prevent out-of-memory fragmentation errors."
+        </div>
+      </div>
+
+      <!-- Terminal Log -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Live System Kernel Console Log</h3>
+          <span class="terminal-badge">KERNEL STDOUT</span>
+        </div>
+        <div class="terminal-log" id="terminalLog"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Teacher Viva Guide Modal -->
+  <div class="modal-backdrop" id="vivaModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>🎓 ExamOS Teacher Viva &amp; Presentation Cheat Sheet</h3>
+        <button class="modal-close-btn" id="btnCloseVivaModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="qa-card">
+          <div class="qa-question">Q1: What is the Producer-Consumer problem in an online examination system?</div>
+          <div class="qa-answer">
+            In an online examination countdown rush, thousands of students click "Submit" simultaneously. Students act as <strong>Producers</strong> generating answer sheets, while backend grading worker threads act as <strong>Consumers</strong> evaluating them. The problem is coordinating access to the shared bounded buffer queue so that submissions are not lost, consumers don't read unwritten slots, and producers don't overwrite pending data.
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "We use 3 semaphores: <code>mutex</code> for mutual exclusion, <code>empty</code> to track free slots, and <code>full</code> to track pending submissions."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q2: Why do you need BOTH a binary mutex AND counting semaphores?</div>
+          <div class="qa-answer">
+            A counting semaphore alone tracks slot quantities (how many are full or empty), but does NOT guarantee mutual exclusion when multiple producers try to increment or write to the array at the exact same clock tick. The binary semaphore <code>mutex</code> guarantees that only <em>one thread at a time</em> executes inside the critical section (buffer array write/read pointer manipulation).
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "Counting semaphores manage synchronization; binary mutex manages mutual exclusion."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q3: What is the Convoy Effect in CPU scheduling, and how did you demonstrate it?</div>
+          <div class="qa-answer">
+            The Convoy Effect occurs in non-preemptive First-Come First-Served (FCFS) when a CPU-intensive long burst process (like P2 Code Evaluation, burst 8ms) arrives first and blocks the CPU. Short burst processes (like P3 Percentile Computation, burst 2ms) are forced to wait in a long queue, causing their waiting times to skyrocket and blowing up average turnaround time.
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "In FCFS, P3 waits 11ms for a 2ms job! In Round Robin with q=2ms, P3 finishes in only 10ms total."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q4: Why did you choose Round Robin with q = 2 ms instead of SJF?</div>
+          <div class="qa-answer">
+            Although Shortest Job First (SJF) minimizes average waiting time mathematically, it causes <strong>CPU Starvation</strong> for long tasks: if short MCQ submissions keep arriving, long descriptive code evaluation tasks will NEVER execute. Round Robin with <code>q = 2 ms</code> provides fair-share preemption where every task gets CPU attention within $(n-1)q$ milliseconds, completely preventing starvation.
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "In high-stakes exams, fairness and zero starvation are more critical than minimizing pure average waiting time."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q5: What are the 4 Coffman conditions for Deadlock, and which one does Banker's break?</div>
+          <div class="qa-answer">
+            The four Coffman conditions are: (1) Mutual Exclusion, (2) Hold and Wait, (3) No Preemption, and (4) Circular Wait. Dijkstra's Banker's algorithm specifically prevents the <strong>Circular Wait</strong> condition by dynamically analyzing resource claims before granting requests.
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "Banker's algorithm ensures that the system NEVER enters an Unsafe State where a circular wait could arise."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q6: What is the difference between an Unsafe State and a Deadlocked State?</div>
+          <div class="qa-answer">
+            An <strong>Unsafe State</strong> is NOT yet deadlocked. Rather, an unsafe state is a state from which the OS can no longer guarantee that a deadlock will not occur if every process demands its maximum declared resource claim. Every deadlocked state is unsafe, but not every unsafe state is deadlocked!
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "A Safe State guarantees at least one safe sequence of execution exists where all processes finish."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q7: What resources does your examination system model in Banker's Algorithm?</div>
+          <div class="qa-answer">
+            ExamOS models three heterogeneous, non-preemptible examination infrastructure resources:
+            (1) <strong>R₁</strong>: Auto-Grading Worker Threads (10 total),
+            (2) <strong>R₂</strong>: Database Write Locks on the Result Ledger (5 total),
+            (3) <strong>R₃</strong>: PDF Generator Rendering Slots (7 total).
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "The safe sequence is mathematically verified as: &lang;P1 &rarr; P3 &rarr; P4 &rarr; P0 &rarr; P2&rang;."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q8: What is External Fragmentation, and why does it happen with student answer submissions?</div>
+          <div class="qa-answer">
+            Student answer submissions have variable sizes (e.g. 120 KB for MCQs, 420 KB for code with test cases). As payloads are loaded into physical RAM and released after grading, free memory becomes fragmented into isolated holes. <strong>External Fragmentation</strong> occurs when the total sum of all free holes is large enough to satisfy a new submission, but no single contiguous hole is big enough!
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "Even if 440 KB of free RAM exists, a 300 KB allocation fails if free RAM is split into 80 KB, 120 KB, and 240 KB holes."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q9: How does Dynamic Compaction (Defragmentation) solve this?</div>
+          <div class="qa-answer">
+            Dynamic Memory Compaction scans the partition table, shifts all allocated memory blocks toward one end of the physical address space (base address 0x0040), and updates their base address registers. All scattered free holes are coalesced into a single large contiguous free block at high memory addresses.
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "Compaction restores 100% of fragmented free memory into one usable contiguous space."
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-question">Q10: Walk me through the entire 5-stage pipeline when a student clicks 'Submit'.</div>
+          <div class="qa-answer">
+            (1) <strong>Stage 1 (Queue):</strong> Enqueued into bounded buffer via <code>wait(empty)</code> and <code>wait(mutex)</code>.<br>
+            (2) <strong>Stage 2 (CPU):</strong> Scheduled on CPU using Round Robin (q=2ms) to execute scoring.<br>
+            (3) <strong>Stage 3 (Banker's):</strong> Requests grading thread, DB lock, and PDF slot; granted only after passing Banker's safety check.<br>
+            (4) <strong>Stage 4 (RAM):</strong> Allocated contiguous memory using Best Fit strategy.<br>
+            (5) <strong>Stage 5 (Complete):</strong> Result card published, locks released, memory freed!
+          </div>
+          <div class="qa-talking-point">
+            <strong>Key Talking Point:</strong> "ExamOS shows how all four OS subsystems work together in a real-world high-concurrency cloud architecture."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <span>ExamOS — Online Examination and Result Processing System &copy; Academic OS Project</span>
+    <span>Zero-Dependency Vanilla Web Stack (HTML5 / CSS3 / ES6+) | Operating Systems Lab Demonstration</span>
+  </footer>
+
+  <!-- Scripts: Core framework & utilities loaded first -->
+  <script src="app.js"></script>
+  <script src="js/producer-consumer.js"></script>
+  <script src="js/cpu-scheduler.js"></script>
+  <script src="js/bankers-algorithm.js"></script>
+  <script src="js/memory-manager.js"></script>
+  <script src="js/integrated-pipeline.js"></script>
+</body>
+</html>
